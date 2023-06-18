@@ -1,3 +1,12 @@
 .update-controller {
   display: none;
 }
+
+body {
+  background: url("darkBackground.jfif");
+  background-size: cover;
+}
+
+h1 {
+  color: #ffffff;
+}
