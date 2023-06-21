@@ -5,6 +5,7 @@
 body {
   background: url("darkBackground.jfif");
   background-size: cover;
+  margin-left: 10px;
 }
 
 h1, h2 {
