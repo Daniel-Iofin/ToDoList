@@ -9,4 +9,18 @@ body {
 
 h1 {
   color: #ffffff;
+  font-family: "Courier New";
+}
+
+.fa {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.task {
+  margin-top: 15px;
+}
+
+#item {
+  margin-bottom: 20px;
 }

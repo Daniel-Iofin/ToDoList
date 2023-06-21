@@ -12,7 +12,7 @@ function displayItems() {
   for(let i=0; i < itemsArray.length; i++) {
     items += `<div class="item">
       <div class="input-controller">
-        <textarea disabled>${itemsArray[i]}</textarea>
+        <textarea disabled class="task" rows=3 cols=29>${itemsArray[i]}</textarea>
         <div class="edit-controller">
           <i class="fa fa-check deleteBtn"></i>
           <i class="fa fa-edit editBtn"></i>
