@@ -1,6 +1,15 @@
 const itemsArray = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")):
 [];
-console.log(itemsArray);
+const completedItems = localStorage.getItem("completed") ? JSON.parse(localStorage.getItem("completed")):
+[];
+var completedCount = localStorage.getItem("completedCount") ? JSON.parse(localStorage.getItem("completedCount")):
+0;
+const removedItems = localStorage.getItem("removed") ? JSON.parse(localStorage.getItem("removed")):
+[];
+var removedCount = localStorage.getItem("removedCount") ? JSON.parse(localStorage.getItem("removedCount")):
+0;
+
+console.log(removedCount, removedItems);
 
 document.querySelector("#enter").addEventListener("click", () => {
   const item = document.querySelector("#item");
@@ -39,7 +48,7 @@ function displayItems() {
 function activateCompleteListeners() {
   const completeBtn = document.querySelectorAll(".completeBtn");
   completeBtn.forEach((cb, i) => {
-    cb.addEventListener("click", () => {deleteItem(i)});
+    cb.addEventListener("click", () => {completeItem(i)});
   })
 }
 
@@ -91,7 +100,21 @@ function updateItem(text, i) {
   location.reload();
 }
 
+function completeItem(i) {
+  completedItems.push(itemsArray[i]);
+  completedCount++;
+  localStorage.setItem("completedCount", JSON.stringify(completedCount));
+  localStorage.setItem("completed", JSON.stringify(completedItems));
+  itemsArray.splice(i, 1);
+  localStorage.setItem("items", JSON.stringify(itemsArray));
+  location.reload();
+}
+
 function deleteItem(i) {
+  removedItems.push(itemsArray[i]);
+  removedCount++;
+  localStorage.setItem("removedCount", JSON.stringify(removedCount));
+  localStorage.setItem("removed", JSON.stringify(removedItems));
   itemsArray.splice(i, 1);
   localStorage.setItem("items", JSON.stringify(itemsArray));
   location.reload();
