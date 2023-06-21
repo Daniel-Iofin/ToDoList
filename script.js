@@ -10,12 +10,16 @@ document.querySelector("#enter").addEventListener("click", () => {
 function displayItems() {
   let items = "";
   for(let i=0; i < itemsArray.length; i++) {
+    let lengthOfText = itemsArray[i].length;
+    let rowsNeeded = (lengthOfText-lengthOfText%(28))/(28) + 1;
+
     items += `<div class="item">
       <div class="input-controller">
-        <textarea disabled class="task" rows=3 cols=29>${itemsArray[i]}</textarea>
+        <textarea disabled class="task" rows=${rowsNeeded} cols=29>${itemsArray[i]}</textarea>
         <div class="edit-controller">
-          <i class="fa fa-check deleteBtn"></i>
+          <i class="fa fa-check completeBtn"></i>
           <i class="fa fa-edit editBtn"></i>
+          <i class="fa fa-trash deleteBtn"></i>
         </div>
       </div>
       <div class="update-controller">
@@ -25,10 +29,18 @@ function displayItems() {
     </div>`
   }
   document.querySelector(".to-do-list").innerHTML = items;
+  activateCompleteListeners();
   activateDeleteListeners();
   activateEditListeners();
   activateSaveListeners();
   activateCancelListeners();
+}
+
+function activateCompleteListeners() {
+  const completeBtn = document.querySelectorAll(".completeBtn");
+  completeBtn.forEach((cb, i) => {
+    cb.addEventListener("click", () => {deleteItem(i)});
+  })
 }
 
 function activateDeleteListeners() {
