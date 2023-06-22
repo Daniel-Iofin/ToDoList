@@ -8,23 +8,26 @@ const removedItems = localStorage.getItem("removed") ? JSON.parse(localStorage.g
 [];
 var removedCount = localStorage.getItem("removedCount") ? JSON.parse(localStorage.getItem("removedCount")):
 0;
-
+console.log(itemsArray);
+console.log(completedCount, completedItems);
 console.log(removedCount, removedItems);
 
 document.querySelector("#enter").addEventListener("click", () => {
   const item = document.querySelector("#item");
-  createItem(item)
+  const date = document.querySelector("#dueDate");
+  const time = document.querySelector("#dueTime");
+  createItem(item, date, time);
 })
 
 function displayItems() {
   let items = "";
   for(let i=0; i < itemsArray.length; i++) {
-    let lengthOfText = itemsArray[i].length;
-    let rowsNeeded = (lengthOfText-lengthOfText%(28))/(28) + 1;
+    let lengthOfText = itemsArray[i][0].length;
+    let rowsNeeded = (lengthOfText-lengthOfText%(54))/(54) + 1;
 
     items += `<div class="item">
       <div class="input-controller">
-        <textarea disabled class="task" rows=${rowsNeeded} cols=29>${itemsArray[i]}</textarea>
+        <textarea disabled class="task" rows=${rowsNeeded} cols=54>${itemsArray[i][0]}</textarea>
         <div class="edit-controller">
           <i class="fa fa-check completeBtn"></i>
           <i class="fa fa-edit editBtn"></i>
@@ -95,7 +98,7 @@ function activateSaveListeners() {
 }
 
 function updateItem(text, i) {
-  itemsArray[i] = text;
+  itemsArray[i][0] = text;
   localStorage.setItem("items", JSON.stringify(itemsArray));
   location.reload();
 }
@@ -120,8 +123,8 @@ function deleteItem(i) {
   location.reload();
 }
 
-function createItem(item) {
-  itemsArray.push(item.value);
+function createItem(item, date, time) {
+  itemsArray.push([item.value, date.value, time.value]);
   localStorage.setItem("items", JSON.stringify(itemsArray));
   location.reload();
 }
