@@ -24,11 +24,14 @@ function displayItems() {
   for(let i=0; i < itemsArray.length; i++) {
     let lengthOfText = itemsArray[i][0].length;
     let rowsNeeded = (lengthOfText-lengthOfText%(54))/(54) + 1;
+    let date = itemsArray[i][1].split("-");
+    date = date[1]+"/"+date[2]+"/"+date[0];
 
     items += `<div class="item">
       <div class="input-controller">
         <textarea disabled class="task" rows=${rowsNeeded} cols=54>${itemsArray[i][0]}</textarea>
         <div class="edit-controller">
+          <p class="dueInfo">${date} ${itemsArray[i][2]}</p>
           <i class="fa fa-check completeBtn"></i>
           <i class="fa fa-edit editBtn"></i>
           <i class="fa fa-trash deleteBtn"></i>
