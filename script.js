@@ -8,9 +8,6 @@ const removedItems = localStorage.getItem("removed") ? JSON.parse(localStorage.g
 [];
 var removedCount = localStorage.getItem("removedCount") ? JSON.parse(localStorage.getItem("removedCount")):
 0;
-console.log(itemsArray);
-console.log(completedCount, completedItems);
-console.log(removedCount, removedItems);
 
 document.querySelector("#enter").addEventListener("click", () => {
   const item = document.querySelector("#item");
