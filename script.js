@@ -21,8 +21,6 @@ function displayItems() {
   for(let i=0; i < itemsArray.length; i++) {
     let lengthOfText = itemsArray[i][0].length;
     let rowsNeeded = (lengthOfText-lengthOfText%(54))/(54) + 1;
-    let date = itemsArray[i][1].split("-");
-    date = date[1]+"/"+date[2]+"/"+date[0];
 
     items += `<div class="item">
       <div class="input-controller">
@@ -39,6 +37,22 @@ function displayItems() {
         <button class="cancelBtn">Cancel</button>
       </div>
     </div>`
+
+    let dueDate = itemsArray[i][1].split("-");
+    let dueYear = date[0];
+    let dueMonth = date[1];
+    let dueDay = date[2];
+    let dueYearDecimal = dueYear + dueMonth/12 + dueDay/31;
+    console.log(dueYearDecimal);
+    dueDateFormatted = dueMonth+"/"+dueDay+"/"+dueYear;
+
+
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth();
+    let currentDay = currentDate.getDate();
+    let currentYearDecimal = currentYear + currentMonth/12 + currentDay/31/12;
+    console.log(currentYearDecimal, dueYearDecimal);
   }
   document.querySelector(".to-do-list").innerHTML = items;
   activateCompleteListeners();
