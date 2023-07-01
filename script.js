@@ -22,11 +22,18 @@ function displayItems() {
     let lengthOfText = itemsArray[i][0].length;
     let rowsNeeded = (lengthOfText-lengthOfText%(54))/(54) + 1;
 
+    let dueDate = itemsArray[i][1].split("-");
+    let dueYear = parseInt(dueDate[0]);
+    let dueMonth = parseInt(dueDate[1]);
+    let dueDay = parseInt(dueDate[2]);
+    let dueYearDecimal = dueYear + dueMonth/12 + dueDay/31/12;
+    dueDateFormatted = dueMonth+"/"+dueDay+"/"+dueYear;
+
     items += `<div class="item">
       <div class="input-controller">
         <textarea disabled class="task" rows=${rowsNeeded} cols=54>${itemsArray[i][0]}</textarea>
         <div class="edit-controller">
-          <p class="dueInfo">${date} ${itemsArray[i][2]}</p>
+          <p class="dueInfo">${dueDateFormatted} ${itemsArray[i][2]}</p>
           <i class="fa fa-check completeBtn"></i>
           <i class="fa fa-edit editBtn"></i>
           <i class="fa fa-trash deleteBtn"></i>
@@ -38,21 +45,11 @@ function displayItems() {
       </div>
     </div>`
 
-    let dueDate = itemsArray[i][1].split("-");
-    let dueYear = date[0];
-    let dueMonth = date[1];
-    let dueDay = date[2];
-    let dueYearDecimal = dueYear + dueMonth/12 + dueDay/31;
-    console.log(dueYearDecimal);
-    dueDateFormatted = dueMonth+"/"+dueDay+"/"+dueYear;
-
-
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
-    let currentMonth = currentDate.getMonth();
+    let currentMonth = currentDate.getMonth() + 1;
     let currentDay = currentDate.getDate();
     let currentYearDecimal = currentYear + currentMonth/12 + currentDay/31/12;
-    console.log(currentYearDecimal, dueYearDecimal);
   }
   document.querySelector(".to-do-list").innerHTML = items;
   activateCompleteListeners();
